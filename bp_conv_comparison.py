@@ -19,6 +19,7 @@ from tensorflow.python.keras.utils import np_utils # 导入np_utils是为了用o
 from tensorflow.keras.layers import Dense,Dropout,Flatten,Conv2D,MaxPooling2D
 
 
+
 # 定义重写回调类获取各层权重
 class CollectWeightCallback(Callback):
     def __init__(self, layer_index1, layer_index2):
@@ -34,10 +35,12 @@ class CollectWeightCallback(Callback):
         layer2 = self.model.layers[self.layer_index2]
         self.weights2.append(layer2.get_weights())
 
+
 # Lemma Two matrices A (nxn) and B (nxn) are similar if and only if the rank of (lamdaI-A)^p equals the rank of (lamdaI-B)^p for any complex number lamda and for
 # any integer p ,1 <= p <= n
 def matrixs_similarity(A, B, lam):
-    print()
+    print(' ')
+
 
 
 # 搭建bp神经网络模型了，创建一个函数，建立含有一个隐层的神经网络
