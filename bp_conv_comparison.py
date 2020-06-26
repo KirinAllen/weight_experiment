@@ -34,6 +34,11 @@ class CollectWeightCallback(Callback):
         layer2 = self.model.layers[self.layer_index2]
         self.weights2.append(layer2.get_weights())
 
+# Lemma Two matrices A (nxn) and B (nxn) are similar if and only if the rank of (lamdaI-A)^p equals the rank of (lamdaI-B)^p for any complex number lamda and for
+# any integer p ,1 <= p <= n
+def matrixs_similarity(A, B, lam):
+    print()
+
 
 # 搭建bp神经网络模型了，创建一个函数，建立含有一个隐层的神经网络
 def bp_baseline_model():

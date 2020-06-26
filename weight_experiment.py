@@ -77,7 +77,6 @@ def baseline_model():
     model.compile(loss='categorical_crossentropy',optimizer='adam',metrics=['accuracy'])
     return model
 
-
  
 # 可视化权重矩阵
 def show_weight():
