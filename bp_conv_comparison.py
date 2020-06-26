@@ -39,7 +39,8 @@ class CollectWeightCallback(Callback):
 # Lemma Two matrices A (nxn) and B (nxn) are similar if and only if the rank of (lamdaI-A)^p equals the rank of (lamdaI-B)^p for any complex number lamda and for
 # any integer p ,1 <= p <= n
 def matrixs_similarity(A, B, lam):
-    print(' ')
+    print('gitcodetest')
+
 
 
 
