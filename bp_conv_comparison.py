@@ -38,10 +38,22 @@ class CollectWeightCallback(Callback):
 
 # Lemma Two matrices A (nxn) and B (nxn) are similar if and only if the rank of (lamdaI-A)^p equals the rank of (lamdaI-B)^p for any complex number lamda and for
 # any integer p ,1 <= p <= n
-def matrixs_similarity(A, B, lam):
-    print('gitcodetest')
-
-
+def matrixs_similarity(A, B, eigvul1, eigvul2):
+    I = np.mat(np.identity(A.shape[-1]))
+    rankA = []
+    rankB = []
+    if A.shape[-1] == B.shape[-1]:
+        for lam1 in eigvul1:
+                for p in range(A.shape[-1]):
+                    print(np.linalg.matrix_rank((lam1*I-A)**p))
+                    rankA.append(np.linalg.matrix_rank((lam1*I-A)**p))
+        for lam2 in eigvul2:
+                for p in range(B.shape[-1]):
+                    print(np.linalg.matrix_rank((lam1*I-B)**p))
+                    rankB.append(np.linalg.matrix_rank((lam1*I-B)**p))
+    
+    if (rankA-rankB) == 0:
+        print('A is similar to B')
 
 
 # 搭建bp神经网络模型了，创建一个函数，建立含有一个隐层的神经网络
@@ -89,10 +101,7 @@ def weight_comparison():
         print('-------------------------------------------------------------------------------')
         bp_eigenvalues1, bp_eigenvectors1 = np.linalg.eigh(bp_weights1.dot(bp_weights1.T))
         bp_eigenvalues2, bp_eigenvectors2 = np.linalg.eigh(bp_weights2.dot(bp_weights2.T))
-        # print('bp_weights1 eigenvalues:',bp_eigenvalues1)
-        # print('bp_weights1 eigenvectors:',bp_eigenvectors1)
-        # print('bp_weights2 eigenvalues:',bp_eigenvalues2)
-        # print('bp_weights2 eigenvectors:',bp_eigenvectors2)
+        
         # conv 网络
         conv_weight_array1 = np.array(cbk_conv.weights1[i])
         conv_weight_array2 = np.array(cbk_conv.weights2[i])
@@ -104,18 +113,16 @@ def weight_comparison():
         print('---------------------------------------------------------------------------------')
         conv_eigenvalues1, conv_eigenvectors1 = np.linalg.eigh(conv_weights1.dot(conv_weights1.T))
         conv_eigenvalues2, conv_eigenvectors2 = np.linalg.eigh(conv_weights2.dot(conv_weights2.T))
-        # print('conv_weights1 eigenvalues:',conv_eigenvalues1)
-        # print('conv_weights1 eigenvectors:',conv_eigenvectors1)
-        # print('conv_weights2 eigenvalues:',conv_eigenvalues2)
-        # print('conv_weights2 eigenvectors:',conv_eigenvectors2)
-        print('两个网络第一层特征值之差：', bp_eigenvalues1-conv_eigenvalues1)
-        print('两个网络第二层特征值之差：',bp_eigenvalues2-conv_eigenvalues2)
-        print('--------------------------------------------------------------------------------')
-        print('两个网络第一层特征矩阵之差：',bp_eigenvectors1-conv_eigenvectors1)
-        print('两个网络第二层特征矩阵之差：',bp_eigenvectors2-conv_eigenvectors2)
-        print('---------------------------------------------------------------------------------')
-        print('两个网络第一层权重矩阵之差：',bp_weights1-conv_weights1)
-        print('两个网络第二层权重矩阵之差：',bp_weights2-conv_weights2)
+        
+        matrixs_similarity(bp_eigenvectors1, conv_eigenvectors1, bp_eigenvalues1, conv_eigenvalues2)
+        # print('两个网络第一层特征值之差：', bp_eigenvalues1-conv_eigenvalues1)
+        # print('两个网络第二层特征值之差：',bp_eigenvalues2-conv_eigenvalues2)
+        # print('--------------------------------------------------------------------------------')
+        # print('两个网络第一层特征矩阵之差：',bp_eigenvectors1-conv_eigenvectors1)
+        # print('两个网络第二层特征矩阵之差：',bp_eigenvectors2-conv_eigenvectors2)
+        # print('---------------------------------------------------------------------------------')
+        # print('两个网络第一层权重矩阵之差：',bp_weights1-conv_weights1)
+        # print('两个网络第二层权重矩阵之差：',bp_weights2-conv_weights2)
 
 
 if __name__ == "__main__":
@@ -142,7 +149,7 @@ if __name__ == "__main__":
     y_test = np_utils.to_categorical(y_test)
     num_classes = y_test.shape[1]
 
-    epoch_num = 5
+    epoch_num = 3
 
     # bp网络训练
     bp_model = bp_baseline_model()
