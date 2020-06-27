@@ -177,7 +177,7 @@ if __name__ == "__main__":
     bp_model.fit(X_train,y_train,validation_data=(X_test,y_test),epochs=epoch_num,batch_size=200,verbose=2, callbacks=[cbk_bp]) 
     # bp模型概括打印
     bp_model.summary()
-    bp_model.save(r'my_model_minst.h5')
+    # bp_model.save(r'my_model_minst.h5')
     # model.save(r'my_model_cifar10.h5')
     scores_bp = bp_model.evaluate(X_test,y_test,verbose=0) #model.evaluate 返回计算误差和准确率
     print(scores_bp)
@@ -191,7 +191,7 @@ if __name__ == "__main__":
     conv_model.fit(X_train_conv,y_train,validation_data=(X_test_conv,y_test),epochs=epoch_num,batch_size=200,verbose=2,callbacks=[cbk_conv])
     # conv模型概括打印
     conv_model.summary()
-    conv_model.save(r'my_conv_model_minst.h5')
+    # conv_model.save(r'my_conv_model_minst.h5')
     scores_conv = conv_model.evaluate(X_test_conv,y_test,verbose=0) #model.evaluate返回计算误差和准确率
     print(scores_conv)
     print("Base Error:%.2f%%"%(100-scores_conv[1]*100))
