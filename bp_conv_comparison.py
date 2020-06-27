@@ -121,8 +121,10 @@ def weight_comparison():
         print('---------------------------------------------------------------------------------')
         conv_eigenvalues1, conv_eigenvectors1 = np.linalg.eigh(conv_weights1.dot(conv_weights1.T))
         conv_eigenvalues2, conv_eigenvectors2 = np.linalg.eigh(conv_weights2.dot(conv_weights2.T))
-        
-        matrixs_similarity(bp_eigenvectors1, conv_eigenvectors1, bp_eigenvalues1, conv_eigenvalues2)
+        # 第一层权重矩阵相似性比较
+        matrixs_similarity(bp_eigenvectors1, conv_eigenvectors1, bp_eigenvalues1, conv_eigenvalues1)
+        # 第二层权重矩阵相似性比较
+        # matrixs_similarity(bp_eigenvectors2, conv_eigenvectors2, bp_eigenvalues2, conv_eigenvalues2)
         # print('两个网络第一层特征值之差：', bp_eigenvalues1-conv_eigenvalues1)
         # print('两个网络第二层特征值之差：',bp_eigenvalues2-conv_eigenvalues2)
         # print('--------------------------------------------------------------------------------')
