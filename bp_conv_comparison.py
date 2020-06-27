@@ -49,7 +49,8 @@ def matrixs_similarity(A, B, eigvul1, eigvul2):
             for p in range(A.shape[-1]):
                 #print(np.linalg.matrix_rank((lam1*I-A)**p))
                 rA = rA*(lam1*I-A)
-                print(np.linalg.matrix_rank(rA),end = ' ')    
+                if p == 5:
+                    print(np.linalg.matrix_rank(rA),end = ' ')    
                 rankA.append(np.linalg.matrix_rank(rA))
         for lam2 in eigvul2:
             rB = lam2*I-B
@@ -57,11 +58,14 @@ def matrixs_similarity(A, B, eigvul1, eigvul2):
             for p in range(B.shape[-1]):
                 #print(np.linalg.matrix_rank((lam1*I-B)**p))
                 rB = rB*(lam2*I-B)
-                print(np.linalg.matrix_rank(rB), end=' ')
+                if p == 5:
+                    print(np.linalg.matrix_rank(rB), end=' ')
                 rankB.append(np.linalg.matrix_rank(rB))
     
-    if (rankA-rankB) == 0:
+    if rankA == rankB:
         print('A is similar to B')
+    else:
+        print('A is not similar to B')
 
 
 # 搭建bp神经网络模型了，创建一个函数，建立含有一个隐层的神经网络
@@ -122,9 +126,9 @@ def weight_comparison():
         conv_eigenvalues1, conv_eigenvectors1 = np.linalg.eigh(conv_weights1.dot(conv_weights1.T))
         conv_eigenvalues2, conv_eigenvectors2 = np.linalg.eigh(conv_weights2.dot(conv_weights2.T))
         # 第一层权重矩阵相似性比较
-        matrixs_similarity(bp_eigenvectors1, conv_eigenvectors1, bp_eigenvalues1, conv_eigenvalues1)
+        # matrixs_similarity(bp_eigenvectors1, conv_eigenvectors1, bp_eigenvalues1, conv_eigenvalues1)
         # 第二层权重矩阵相似性比较
-        # matrixs_similarity(bp_eigenvectors2, conv_eigenvectors2, bp_eigenvalues2, conv_eigenvalues2)
+        matrixs_similarity(bp_eigenvectors2, conv_eigenvectors2, bp_eigenvalues2, conv_eigenvalues2)
         # print('两个网络第一层特征值之差：', bp_eigenvalues1-conv_eigenvalues1)
         # print('两个网络第二层特征值之差：',bp_eigenvalues2-conv_eigenvalues2)
         # print('--------------------------------------------------------------------------------')
@@ -136,6 +140,11 @@ def weight_comparison():
 
 
 if __name__ == "__main__":
+    # test
+    list1 = [1,2,3,4,5]
+    list2 = [1,2,3,4,5]
+    if list1 == list2:
+        print('same list')
     seed = 7 #设置随机种子
     first_layer = 200
     second_layer = 10
