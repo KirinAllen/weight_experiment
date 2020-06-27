@@ -44,13 +44,21 @@ def matrixs_similarity(A, B, eigvul1, eigvul2):
     rankB = []
     if A.shape[-1] == B.shape[-1]:
         for lam1 in eigvul1:
-                for p in range(A.shape[-1]):
-                    print(np.linalg.matrix_rank((lam1*I-A)**p))
-                    rankA.append(np.linalg.matrix_rank((lam1*I-A)**p))
+            rA = lam1*I-A
+            rankA.append(np.linalg.matrix_rank(rA))
+            for p in range(A.shape[-1]):
+                #print(np.linalg.matrix_rank((lam1*I-A)**p))
+                rA = rA*(lam1*I-A)
+                print(np.linalg.matrix_rank(rA),end = ' ')    
+                rankA.append(np.linalg.matrix_rank(rA))
         for lam2 in eigvul2:
-                for p in range(B.shape[-1]):
-                    print(np.linalg.matrix_rank((lam1*I-B)**p))
-                    rankB.append(np.linalg.matrix_rank((lam1*I-B)**p))
+            rB = lam2*I-B
+            rankB.append(np.linalg.matrix_rank(rB))
+            for p in range(B.shape[-1]):
+                #print(np.linalg.matrix_rank((lam1*I-B)**p))
+                rB = rB*(lam2*I-B)
+                print(np.linalg.matrix_rank(rB), end=' ')
+                rankB.append(np.linalg.matrix_rank(rB))
     
     if (rankA-rankB) == 0:
         print('A is similar to B')
