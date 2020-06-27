@@ -46,26 +46,26 @@ def matrixs_similarity(A, B, eigvul1, eigvul2):
         for lam1 in eigvul1:
             rA = lam1*I-A
             rankA.append(np.linalg.matrix_rank(rA))
-            for p in range(A.shape[-1]):
+            for pa in range(A.shape[-1]):
                 #print(np.linalg.matrix_rank((lam1*I-A)**p))
                 rA = rA*(lam1*I-A)
-                if p == 5:
+                if pa == 5:
                     print(np.linalg.matrix_rank(rA),end = ' ')    
                 rankA.append(np.linalg.matrix_rank(rA))
         for lam2 in eigvul2:
             rB = lam2*I-B
             rankB.append(np.linalg.matrix_rank(rB))
-            for p in range(B.shape[-1]):
+            for pb in range(B.shape[-1]):
                 #print(np.linalg.matrix_rank((lam1*I-B)**p))
                 rB = rB*(lam2*I-B)
-                if p == 5:
+                if pb == 5:
                     print(np.linalg.matrix_rank(rB), end=' ')
                 rankB.append(np.linalg.matrix_rank(rB))
     
     if rankA == rankB:
-        print('A is similar to B')
+        print('\n A is similar to B')
     else:
-        print('A is not similar to B')
+        print('\n A is not similar to B')
 
 
 # 搭建bp神经网络模型了，创建一个函数，建立含有一个隐层的神经网络
