@@ -1,5 +1,5 @@
-# import os
-# os.environ["CUDA_VISIBLE_DEVICES"] = "0" # 调用GPU
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "0" # 有GPU资源则调用GPU，没有就忽略
 
 import csv
 import codecs
