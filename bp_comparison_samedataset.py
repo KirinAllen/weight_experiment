@@ -114,6 +114,8 @@ def bp2_baseline_model():
 def weight_comparison():
     for i in range(epoch_num):
         print('epoch:',i+1)
+
+        
         # bp 网络
         bp_weights_array1 = np.array(cbk_bp.weights1[i])
         bp_weights_array2 = np.array(cbk_bp.weights2[i])
