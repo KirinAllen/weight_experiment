@@ -97,6 +97,7 @@ def conv_baseline_model():
     model.compile(loss='categorical_crossentropy',optimizer='adam',metrics=['accuracy'])
     return model
 
+
 # 两个网络的权重比较
 def weight_comparison():
 
@@ -130,7 +131,7 @@ def weight_comparison():
         conv_eigenvalues1, conv_eigenvectors1 = np.linalg.eigh(C)
         conv_eigenvalues2, conv_eigenvectors2 = np.linalg.eigh(D)
         # 第一层权重矩阵相似性比较
-        # matrixs_similarity(bp_eigenvectors1, conv_eigenvectors1, bp_eigenvalues1, conv_eigenvalues1)
+        # matrixs_similarity(A, C, bp_eigenvalues1, conv_eigenvalues1)
         # 第二层权重矩阵相似性比较
         matrixs_similarity(B, D, bp_eigenvalues2, conv_eigenvalues2)
         # print('两个网络第一层特征值之差：', bp_eigenvalues1-conv_eigenvalues1)
