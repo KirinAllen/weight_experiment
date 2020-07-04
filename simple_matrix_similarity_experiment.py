@@ -47,9 +47,10 @@ def NoneSquareToSquareMatrix(A,B):
 
 
 if __name__ == "__main__":
-
-    A1 = np.matrix(np.array([[0,1,0],[0,0,1]]))
-    B1 = np.matrix(np.array([[1,0,0],[0,1,0]]))
+    # 3x3简单矩阵小测试
+    A1 = np.matrix(np.array([[0,3,0],[1,0,0]]))
+    B1 = np.matrix(np.array([[1,0,0],[0,0,0]]))
+    # 4x4矩阵相似性测试
 
     print(A1.shape)
     print(B1.shape)
