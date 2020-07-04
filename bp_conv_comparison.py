@@ -111,8 +111,10 @@ def weight_comparison():
         print('------------------------------------------------------------------------------')
         print('bp网络第二层权重矩阵为:', bp_weights2)
         print('-------------------------------------------------------------------------------')
-        bp_eigenvalues1, bp_eigenvectors1 = np.linalg.eigh(bp_weights1.dot(bp_weights1.T))
-        bp_eigenvalues2, bp_eigenvectors2 = np.linalg.eigh(bp_weights2.dot(bp_weights2.T))
+        A = bp_weights1.dot(bp_weights1.T)
+        B = bp_weights2.dot(bp_weights2.T)
+        bp_eigenvalues1, bp_eigenvectors1 = np.linalg.eigh(A)
+        bp_eigenvalues2, bp_eigenvectors2 = np.linalg.eigh(B)
         
         # conv 网络
         conv_weight_array1 = np.array(cbk_conv.weights1[i])
@@ -123,12 +125,14 @@ def weight_comparison():
         print('---------------------------------------------------------------------------------')
         print('conv网络第二层权重矩阵为:', conv_weights2)
         print('---------------------------------------------------------------------------------')
-        conv_eigenvalues1, conv_eigenvectors1 = np.linalg.eigh(conv_weights1.dot(conv_weights1.T))
-        conv_eigenvalues2, conv_eigenvectors2 = np.linalg.eigh(conv_weights2.dot(conv_weights2.T))
+        C = conv_weights1.dot(conv_weights1.T)
+        D = conv_weights2.dot(conv_weights2.T)
+        conv_eigenvalues1, conv_eigenvectors1 = np.linalg.eigh(C)
+        conv_eigenvalues2, conv_eigenvectors2 = np.linalg.eigh(D)
         # 第一层权重矩阵相似性比较
         # matrixs_similarity(bp_eigenvectors1, conv_eigenvectors1, bp_eigenvalues1, conv_eigenvalues1)
         # 第二层权重矩阵相似性比较
-        matrixs_similarity(bp_eigenvectors2, conv_eigenvectors2, bp_eigenvalues2, conv_eigenvalues2)
+        matrixs_similarity(B, D, bp_eigenvalues2, conv_eigenvalues2)
         # print('两个网络第一层特征值之差：', bp_eigenvalues1-conv_eigenvalues1)
         # print('两个网络第二层特征值之差：',bp_eigenvalues2-conv_eigenvalues2)
         # print('--------------------------------------------------------------------------------')
